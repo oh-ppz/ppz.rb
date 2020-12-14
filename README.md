@@ -14,3 +14,6 @@ markdown 好用，但还不够，这就是 mazi （码字）产生的原因
 本仓库分两大部分：
 + 标准
 + 一个 js 实现
+
+# 临时内容
++  [id索引](https://stackoverflow.com/questions/12868830/get-css-id-from-url)
