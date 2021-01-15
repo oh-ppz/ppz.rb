@@ -1,0 +1,3 @@
+class AbstractModel
+  
+end
