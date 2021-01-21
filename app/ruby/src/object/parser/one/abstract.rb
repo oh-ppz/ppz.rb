@@ -29,7 +29,7 @@ class AbstractOneParser
           6 => 3
         }[flag_length] || 2
         # 实例化 model
-        target = LeafSectionModel.new line[flag_length...-1], level
+        target = LeafSectionModel.new line[flag_length..-1], level
         # 检查 level
         loop do
           break if @context.level < target.level
