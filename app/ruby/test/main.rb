@@ -1,4 +1,5 @@
 require_relative '../src/object/parser/one/string'
+require_relative '../src/func/index'
 
 target = StringParser.new %{# 标题一
 ## 标题二
@@ -12,4 +13,5 @@ heihei
 哈哈哈啊哈}
 
 model = target.get_model
-p model.to_html
+html = model.to_html
+Func::write_to_file 'test.html', html
