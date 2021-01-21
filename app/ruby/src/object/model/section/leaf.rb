@@ -1,6 +1,8 @@
 require_relative './abstract'
 
 class LeafSectionModel < AbstractSectionModel
+  REG_EXP = /^\#{1-5} /
+
   attr_accessor :level, :title, :father
 
   def initialize title

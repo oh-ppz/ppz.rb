@@ -15,6 +15,6 @@ class Context
   end
 
   def head
-    stack.[-1]
+    stack[-1]
   end
 end
