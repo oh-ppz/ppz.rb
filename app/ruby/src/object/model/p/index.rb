@@ -8,4 +8,8 @@ class PModel < AbstractModel
   def on_append  
     puts ' : ' + @text
   end
+
+  def to_html
+    "<p>#{@text}</p>"
+  end
 end

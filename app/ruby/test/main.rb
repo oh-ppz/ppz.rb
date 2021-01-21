@@ -1,9 +1,10 @@
 require_relative '../src/object/parser/one/string'
 
-target = StringParser.new %{}
+target = StringParser.new %{# h1 h2
+haha
+heihei
+## gogo aaaaaaa,\n\t..dasfkljasljfa
+### gogogo}
 
-puts target.read_line
-puts target.read_line
-puts target.read_line
-puts target.read_line
-puts target.read_line
+model = target.get_model
+p model

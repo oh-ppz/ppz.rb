@@ -7,7 +7,7 @@ class Context
   end
 
   def append target
-    @stack.append target
+    @stack.push target
   end
   
   def pop
@@ -16,5 +16,9 @@ class Context
 
   def head
     @stack[-1]
+  end
+
+  def root
+    @stack[0]
   end
 end
