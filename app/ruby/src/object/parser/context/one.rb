@@ -18,7 +18,7 @@ class ContextOne < Context
     set_level
   end
 
-  def set_level  
+  def set_level
     if head.respond_to? :level
       @level = head.level
     end

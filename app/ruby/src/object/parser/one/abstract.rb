@@ -35,13 +35,17 @@ class AbstractOneParser
           break if @context.level < target.level
           @context.pop
         end
+      # p
       else
         target = PModel.new line
       end
-      
+
+      # 添加到父级 model
+      @context.head.append target
+
+      # 推入上下文
       if target.is_a? AbstractWrapperModel
-        @context.append target # 推入上下文
+        @context.append target 
       end
-      @context.head.append target # 添加到父级 model
     end
 end
