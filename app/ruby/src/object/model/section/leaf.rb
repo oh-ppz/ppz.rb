@@ -1,13 +1,17 @@
 require_relative './abstract'
 
 class LeafSectionModel < AbstractSectionModel
-  REG_EXP = /^\#{1-5} /
+  REG_EXP = /^\#{1,5} /
 
   attr_accessor :level, :title, :father
 
   def initialize title
     super() # 不可以省略括号
     @title = title
+  end
+
+  def on_append  
+    puts 'h: ' + @title
   end
 
   def append section

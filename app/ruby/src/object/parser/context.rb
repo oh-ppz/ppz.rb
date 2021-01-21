@@ -2,19 +2,19 @@
 # 比如 一级 section 下面的 ul 下的 第 n 个 ul
 
 class Context
-  def initialize
-    stack = []
+  def initialize root
+    @stack = [root]
   end
 
-  def push target
-    stack.push target
+  def append target
+    @stack.append target
   end
   
   def pop
-    stack.pop
+    @stack.pop
   end
 
   def head
-    stack[-1]
+    @stack[-1]
   end
 end
