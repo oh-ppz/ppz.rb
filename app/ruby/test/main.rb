@@ -1,4 +1,4 @@
-require_relative '../src/object/parser/one/string'
+require_relative '../src/object/parser/doc/string'
 require_relative '../src/func/index'
 
 target = StringParser.new %{哈哈哈啊哈
