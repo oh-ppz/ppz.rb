@@ -3,18 +3,7 @@ require_relative '../src/func/index'
 
 target = StringParser.new %{哈哈哈啊哈
 # haha
-+ 1
-+ 2
-
-+ 3
-+ 4
-
-##hahh
 ## haha
-go
-+ 1
-+ 2
-+33
 }
 
 model = target.get_model

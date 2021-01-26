@@ -1,7 +1,6 @@
 require_relative './abstract'
 
 class LeafSectionModel < AbstractSectionModel
-  REG_EXP = /^\#{1,5} /
 
   attr_accessor :title, :father
   attr_reader :level
@@ -11,6 +10,17 @@ class LeafSectionModel < AbstractSectionModel
     super() # 不可以省略括号
     @title = title
     @level = level
+  end
+
+  REG_EXP = /^\#{1,5} /
+  def self.from_line line
+    return nil unless match_data = REG_EXP.match(line)
+    
+    level = {
+      2 => 1,
+      6 => 3
+    }[match_data.to_s.length] || 2
+    LeafSectionModel.new match_data.post_match, level
   end
 
   def on_append  
