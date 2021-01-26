@@ -1,5 +1,5 @@
 require_relative '../src/object/parser/doc/file'
-require_relative '../src/func/index'
+require_relative '../src/func/util'
 require 'pathname'
 
 dirname = File.dirname __FILE__
