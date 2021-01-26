@@ -1,16 +1,21 @@
 require_relative '../src/object/parser/one/string'
 require_relative '../src/func/index'
 
-target = StringParser.new %{# 标题一
-## 标题二
-222222
-### 标题2.1
-2.1.2.1
-haha
-heihei
-#### 标题2.2
-##### 标题 333333
-哈哈哈啊哈}
+target = StringParser.new %{哈哈哈啊哈
+# haha
++ 1
++ 2
+
++ 3
++ 4
+
+##hahh
+## haha
+go
++ 1
++ 2
++33
+}
 
 model = target.get_model
 html = model.to_html
