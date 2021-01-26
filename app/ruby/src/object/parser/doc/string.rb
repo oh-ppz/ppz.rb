@@ -1,12 +1,12 @@
 require_relative './abstract'
 
-class StringParser < AbstractOneParser
+class StringDocParser < AbstractDocParser
   def initialize str
     super()
     @lines = str.split /\n/
   end
 
-  private def read_line
+  private def readline
     @lines.shift
   end
 end

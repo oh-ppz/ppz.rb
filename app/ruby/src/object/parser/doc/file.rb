@@ -1,12 +1,23 @@
 require_relative './abstract'
 
-class FileParser < AbstractOneParser
-  def initialize file
+class FileDocParser < AbstractDocParser
+  def initialize path
     super()
-    # file: 文件夹路径、文件对象、读取流
-
+    unless File.exist? path
+      throw '文件不存在，可能是路径错了（需要绝对路径）：' + path
+    end
+    @file = File.new path
+    @end = false
   end
 
-  private def read_line
+  private def readline
+    return nil if @end
+
+    begin
+      return @file.readline[0...-1]
+    rescue EOFError => err
+      @end = true
+      return nil
+    end
   end
 end

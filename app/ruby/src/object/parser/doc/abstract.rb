@@ -7,14 +7,14 @@ require_relative '../../model/p/index'
 require_relative '../../model/list/item/unordered'
 require_relative '../../model/list/wrapper/unordered'
 
-class AbstractOneParser
+class AbstractDocParser
   def initialize
     @context = DocContext.new RootSectionModel.new
   end
 
   def get_model
     loop do
-      line = read_line
+      line = readline
       break unless line != nil
       handle_line line
     end
