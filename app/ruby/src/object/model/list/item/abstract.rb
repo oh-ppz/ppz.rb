@@ -2,7 +2,7 @@ require_relative '../../abstract/wrapper-model'
 
 class AbstractListItemModel < AbstractModel
   def initialize text
-    @text = text
+    @text = transform_inline_element text
   end
   
   def on_append

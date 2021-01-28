@@ -8,7 +8,7 @@ class LeafSectionModel < AbstractSectionModel
   def initialize title, level
     raise TypeError unless title.is_a?(String) && level.is_a?(Integer) 
     super() # 不可以省略括号
-    @title = title
+    @title = transform_inline_element title
     @level = level
   end
 

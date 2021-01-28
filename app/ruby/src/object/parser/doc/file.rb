@@ -14,7 +14,8 @@ class FileDocParser < AbstractDocParser
     return nil if @end
 
     begin
-      return @file.readline[0...-1]
+      line = @file.readline
+      return line[-1] == '\n'? line[0...-1] : line
     rescue EOFError => err
       @end = true
       return nil

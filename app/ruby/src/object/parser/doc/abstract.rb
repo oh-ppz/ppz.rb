@@ -1,6 +1,5 @@
 # 解析一个 .ppz 文档（可以是一个文件、字符串）
 
-require_relative '../../../func/util'
 require_relative '../common/context/doc'
 require_relative '../../model/section/leaf'
 require_relative '../../model/section/root'
@@ -24,8 +23,6 @@ class AbstractDocParser
 
   private
     def handle_line line
-      Func.escape_ppz! line
-
       if target = LeafSectionModel.from_line(line)
       # section
         # 检查 level
