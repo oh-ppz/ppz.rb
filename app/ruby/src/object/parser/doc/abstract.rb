@@ -33,27 +33,17 @@ class AbstractDocParser
           break if @context.level < target.level
           @context.pop
         end
-      elsif flag = (UnorderedListItemModel::REG_EXP.match line)
+      elsif target = UnorderedListItemModel.from_line(line)
       # 列表
-        unless @context.head.is_a? UnorderedListWrapperModel
-          loop do
-            break if @context.head.is_a? AbstractSectionModel
-            @context.pop
-          end
-          wrapper = UnorderedListWrapperModel.new
-          @context.head.append wrapper
-          @context.append wrapper
+        unless @context.head.is_a? UnorderedListWrapperModel # 如果当前不在一个 无序列表 里
+          wrapper = UnorderedListWrapperModel.new # 就整一个无序列表
+          @context.pop_to_section # 找到最近的 section
+          @context.head.append wrapper # 加入 wrapper
+          @context.append wrapper # wrapper 入上下文栈
         end
-
-        flag_length = flag.to_s.length
-        target = UnorderedListItemModel.new line[flag_length..-1]
       # p
       else
-        loop do
-          break if @context.head.is_a? AbstractSectionModel
-          @context.pop
-        end
-
+        @context.pop_to_section # 找到最近的 section
         target = PModel.new line
       end
 

@@ -8,4 +8,8 @@ class DocContext < AbstractContext
     end
     throw '不应该到这里'
   end
+
+  def pop_to_section
+    pop_to AbstractSectionModel
+  end
 end

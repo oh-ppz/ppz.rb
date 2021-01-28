@@ -21,4 +21,12 @@ class AbstractContext
   def root
     @stack[0]
   end
+
+  private
+    def pop_to klass
+      loop do
+        break if head.is_a? klass
+        pop
+      end
+    end
 end
