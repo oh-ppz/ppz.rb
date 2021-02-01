@@ -6,6 +6,8 @@ require_relative '../../model/section/root'
 require_relative '../../model/p/index'
 require_relative '../../model/list/item/unordered'
 require_relative '../../model/list/wrapper/unordered'
+require_relative '../../model/special-block/container'
+require_relative '../../model/special-block/item'
 
 class AbstractDocParser
   def initialize
@@ -23,7 +25,17 @@ class AbstractDocParser
 
   private
     def handle_line line
-      if target = LeafSectionModel.from_line(line)
+      if @context.head.is_a? SpecialContainerModel
+      # special-block
+        if /^``` *$/.match line
+          @context.pop
+          return
+        else
+          target = SpecialItemModel.new line
+        end
+      elsif target = SpecialContainerModel.from_line(line)
+
+      elsif target = LeafSectionModel.from_line(line)
       # section
         # 检查 level
         loop do

@@ -12,3 +12,11 @@
 
 <div>haha</div>
 <b>go \* go * </b>
+
+``` js java c
+const { Server } from 'kuaizi'
+
+Server.start(8080)
+```
+
+这是底部文字
