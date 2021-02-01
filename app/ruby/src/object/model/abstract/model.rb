@@ -9,7 +9,7 @@ class AbstractModel
     end
   end
 
-  # 加粗、斜体等
+  # 加粗、斜体、链接等
   def transform_inline_element str
     str = str + ''
     # 因为加粗、斜体等，会生成 html 代码，为了不使“用户原本输入的 html”和“生成的 html”冲突，因此先把“用户输入的 html 转义
@@ -34,6 +34,10 @@ class AbstractModel
     str.gsub! /\*(.+)\*/, '<i>\1</i>'
     # 4. 行内块
     str.gsub! /```(.+)```/, '<span class="special-txt">\1</span>'
+    # 5. 链接
+    str.gsub! /\[([^\]]+)\]\(([^\)]+)\)/, '<a href="\2" title="\2">\1</a>'
+    # 6. 图片
+    str.gsub! /!\[([^\]]*)\]\(([^\)]+)\)/, '<img title="\1" src="\2" />'
     
     Escape.transform_to_real! str
   end

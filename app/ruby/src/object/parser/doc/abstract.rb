@@ -28,13 +28,15 @@ class AbstractDocParser
       if @context.head.is_a? SpecialContainerModel
       # special-block
         if /^``` *$/.match line
+        # special-block-end
           @context.pop
           return
         else
+        # special-block-item
           target = SpecialItemModel.new line
         end
       elsif target = SpecialContainerModel.from_line(line)
-
+      # special-block-container
       elsif target = LeafSectionModel.from_line(line)
       # section
         # 检查 level
