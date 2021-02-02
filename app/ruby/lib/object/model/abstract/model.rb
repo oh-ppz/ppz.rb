@@ -34,10 +34,10 @@ class AbstractModel
     str.gsub! /\*(.+)\*/, '<i>\1</i>'
     # 4. 行内块
     str.gsub! /```([^(```)]+)```/, '<span class="special-txt">\1</span>'
-    # 5. 链接
-    str.gsub! /\[([^\]]+)\]\(([^\)]+)\)/, '<a href="\2" title="\2">\1</a>'
-    # 6. 图片
+    # 5. 图片 先图片后链接
     str.gsub! /!\[([^\]]*)\]\(([^\)]+)\)/, '<img title="\1" src="\2" />'
+    # 6. 链接 先图片后链接
+    str.gsub! /\[([^\]]+)\]\(([^\)]+)\)/, '<a href="\2" title="\2">\1</a>'
     
     Escape.transform_to_real! str
   end
