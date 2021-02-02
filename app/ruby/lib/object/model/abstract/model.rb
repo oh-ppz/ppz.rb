@@ -33,7 +33,7 @@ class AbstractModel
     # 3. 斜体
     str.gsub! /\*(.+)\*/, '<i>\1</i>'
     # 4. 行内块
-    str.gsub! /```(.+)```/, '<span class="special-txt">\1</span>'
+    str.gsub! /```([^(```)]+)```/, '<span class="special-txt">\1</span>'
     # 5. 链接
     str.gsub! /\[([^\]]+)\]\(([^\)]+)\)/, '<a href="\2" title="\2">\1</a>'
     # 6. 图片

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ppz'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.executables << 'ppz'
   s.summary     = '写作'
   s.authors     = ['wuse']
