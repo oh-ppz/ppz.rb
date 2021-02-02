@@ -23,10 +23,6 @@ class LeafSectionModel < AbstractSectionModel
     LeafSectionModel.new match_data.post_match, level
   end
 
-  def on_append  
-    puts 'h: ' + @title
-  end
-
   def to_html
     %{<section><h#{@level}>#{@title}</h#{@level}>#{
       super

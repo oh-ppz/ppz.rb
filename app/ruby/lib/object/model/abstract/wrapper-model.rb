@@ -7,9 +7,6 @@ class AbstractWrapperModel < AbstractModel
   
   # 把 el 加入到 children
   def append el
-    if el.respond_to? :on_append
-      el.on_append
-    end
     @children.push el
   end
 

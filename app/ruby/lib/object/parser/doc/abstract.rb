@@ -46,9 +46,15 @@ class AbstractDocParser
         end
       elsif target = UnorderedListItemModel.from_line(line)
       # 列表
-        unless @context.head.is_a? UnorderedListWrapperModel # 如果当前不在一个 无序列表 里
-          wrapper = UnorderedListWrapperModel.new # 就整一个无序列表
-          @context.pop_to_section # 找到最近的 section
+        head = @context.head
+        unless (head.is_a? UnorderedListWrapperModel) and (head.level == target.level) # 如果当前不在一个 无序列表 里
+          wrapper = UnorderedListWrapperModel.new target.level # 就整一个无序列表
+          loop do # 找到最近的 section 或 list
+            head = @context.head
+            break if (head.is_a? AbstractSectionModel) or
+              ((head.is_a? AbstractListWrapperModel) and (head.level < wrapper.level))
+            @context.pop
+          end
           @context.head.append wrapper # 加入 wrapper
           @context.append wrapper # wrapper 入上下文栈
         end

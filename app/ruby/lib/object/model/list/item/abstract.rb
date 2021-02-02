@@ -1,12 +1,12 @@
 require_relative '../../abstract/wrapper-model'
 
 class AbstractListItemModel < AbstractModel
-  def initialize text
-    @text = transform_inline_element text
-  end
+  attr_reader :level
   
-  def on_append
-    puts '+: ' + @text
+  def initialize text, level
+    super()
+    @text = transform_inline_element text
+    @level = level
   end
 
   def to_html
