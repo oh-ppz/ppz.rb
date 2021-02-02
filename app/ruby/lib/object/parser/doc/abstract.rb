@@ -31,10 +31,11 @@ class AbstractDocParser
         # special-block-end
           @context.pop
           return
-        else
-        # special-block-item
-          target = SpecialItemModel.new line
+        elsif /\\``` *$/.match line
+          line = line[1..-1]
         end
+        # special-block-item
+        target = SpecialItemModel.new line  
       elsif target = SpecialContainerModel.from_line(line)
       # special-block-container
       elsif target = LeafSectionModel.from_line(line)
