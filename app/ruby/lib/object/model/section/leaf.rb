@@ -2,7 +2,7 @@ require_relative './abstract'
 
 class LeafSectionModel < AbstractSectionModel
   attr_accessor :title, :father
-  attr_reader :level
+  attr_reader :level, :dom_id
 
   def initialize title, level
     raise TypeError unless title.is_a?(String) && level.is_a?(Integer) 
@@ -22,8 +22,13 @@ class LeafSectionModel < AbstractSectionModel
     LeafSectionModel.new $2, level
   end
 
+  def append section
+    super
+    @dom_id = "#{@father.dom_id}-#{@level.to_s}.#{@index.to_s}"
+  end
+
   def to_html
-    %{<section><h#{@level}>#{@title}</h#{@level}>#{
+    %{<section id=#{@dom_id}><h#{@level}>#{@title}</h#{@level}>#{
       super
     }</section>}
   end
