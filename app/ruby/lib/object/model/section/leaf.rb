@@ -1,7 +1,7 @@
 require_relative './abstract'
 
 class LeafSectionModel < AbstractSectionModel
-  attr_accessor :title, :father, :section_dom_id, :level
+  attr_accessor :title, :section_dom_id, :level
 
   def initialize title, level
     raise TypeError unless title.is_a?(String) && level.is_a?(Integer) 

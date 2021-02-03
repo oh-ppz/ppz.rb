@@ -4,7 +4,6 @@ class AbstractSectionModel < AbstractWrapperModel
   def append section
     super
     if section.is_a? AbstractSectionModel
-      section.father = self
       section.section_dom_id = "#{section_dom_id}-#{section.level.to_s}.#{section.index.to_s}"
     end
   end

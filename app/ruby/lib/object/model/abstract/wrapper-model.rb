@@ -7,6 +7,8 @@ class AbstractWrapperModel < AbstractModel
   
   # 把 el 加入到 children
   def append el
+    el.father_model = self
+
     left_model = @children[-1]
     if left_model
       left_model.right_model = el

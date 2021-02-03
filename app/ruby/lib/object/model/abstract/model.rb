@@ -2,6 +2,7 @@ require_relative '../common/escape'
 
 class AbstractModel
   attr_accessor :left_model, :right_model, :index # 左右兄弟 model
+  attr_accessor :father_model
 
   def self.from_line line # 静态方法，从“输入行”里实例化一个 model
     return nil unless self::REG_EXP.match(line)
