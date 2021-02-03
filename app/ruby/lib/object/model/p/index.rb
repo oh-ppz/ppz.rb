@@ -1,6 +1,8 @@
 require_relative '../abstract/model'
 
 class PModel < AbstractModel
+  UpperClass = AbstractSectionModel
+
   def initialize text
     # 转义行首的加号
     pre = text[0..2]

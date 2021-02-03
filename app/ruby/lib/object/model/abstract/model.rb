@@ -2,11 +2,8 @@ require_relative '../common/escape'
 
 class AbstractModel
   def self.from_line line # 静态方法，从“输入行”里实例化一个 model
-    if match_data = self::REG_EXP.match(line)
-      self.new match_data.post_match
-    else
-      nil
-    end
+    return nil unless self::REG_EXP.match(line)
+    self.new $1
   end
 
   # 加粗、斜体、链接等

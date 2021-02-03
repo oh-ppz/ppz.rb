@@ -8,5 +8,14 @@ class Func
       file.print data
       file.close
     end
+
+    # 检查某类有没有某常量
+    def has_const? klass, const_name
+      klass.constants.include? const_name
+    end
+    # 检查某实例的类有没有某常量
+    def class_has_const? instance, const_name
+      has_const? instance.class, const_name
+    end
   end
 end

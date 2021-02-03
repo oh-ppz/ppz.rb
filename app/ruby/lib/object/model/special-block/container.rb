@@ -1,9 +1,11 @@
 require_relative '../abstract/wrapper-model'
 
 class SpecialContainerModel < AbstractWrapperModel
+  UpperClass = AbstractSectionModel
+
   REG_EXP = /^```( (.*))?/
   def self.from_line line
-    return nil unless match_data = REG_EXP.match(line)
+    return nil unless REG_EXP.match(line)
     SpecialContainerModel.new $2
   end
 

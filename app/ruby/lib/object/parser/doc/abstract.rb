@@ -8,6 +8,8 @@ require_relative '../../model/list/item/unordered'
 require_relative '../../model/list/wrapper/unordered'
 require_relative '../../model/special-block/container'
 require_relative '../../model/special-block/item'
+require_relative '../../model/comment/container'
+require_relative '../../model/comment/item'
 
 class AbstractDocParser
   def initialize
@@ -25,52 +27,46 @@ class AbstractDocParser
 
   private
     def handle_line line
-      if @context.head.is_a? SpecialContainerModel
-      # special-block
-        if /^``` *$/.match line
+      head = @context.head
+      if head.is_a? SpecialContainerModel # 只要进入 special-block，下面的 line 都算是 special-block 的content
+        # special-block
+        if /^``` *$/.match line # 除非遇到 ``` （special-block 的结束符）
         # special-block-end
-          @context.pop
-          return
-        elsif /\\``` *$/.match line
+          @context.pop # 遇到，就跳出去
+          return # 立刻结束
+        elsif /\\``` *$/.match line # 但是有的 ``` （是 special-block 的内容，于是需要转义）
           line = line[1..-1]
         end
         # special-block-item
         target = SpecialItemModel.new line  
-      elsif target = SpecialContainerModel.from_line(line)
-      # special-block-container
       elsif target = LeafSectionModel.from_line(line)
-      # section
+        # section
         # 检查 level
         loop do
           break if @context.level < target.level
           @context.pop
         end
       elsif target = UnorderedListItemModel.from_line(line)
-      # 列表
-        head = @context.head
+        # 列表
         unless (head.is_a? UnorderedListWrapperModel) and (head.level == target.level) # 如果当前不在一个 无序列表 里
           wrapper = UnorderedListWrapperModel.new target.level # 就整一个无序列表
           loop do # 找到最近的 section 或 list
-            head = @context.head
             break if (head.is_a? AbstractSectionModel) or
               ((head.is_a? AbstractListWrapperModel) and (head.level < wrapper.level))
             @context.pop
+            head = @context.head
           end
-          @context.head.append wrapper # 加入 wrapper
           @context.append wrapper # wrapper 入上下文栈
         end
-      # p
+      elsif target = CommentItemModel.from_line(line)
+        # 注释
+      elsif target = SpecialContainerModel.from_line(line)
+        # 特殊快
       else
-        @context.pop_to_section # 找到最近的 section
+        # p
         target = PModel.new line
       end
 
-      # 添加到父级 model
-      @context.head.append target
-
-      # 推入上下文
-      if target.is_a? AbstractWrapperModel
-        @context.append target 
-      end
+      @context.append target
     end
 end
