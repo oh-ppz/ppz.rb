@@ -41,22 +41,29 @@ class AbstractDocParser
         target = SpecialItemModel.new line  
       elsif target = LeafSectionModel.from_line(line)
         # section
-        # 检查 level
         loop do
-          break if @context.level < target.level
+          break if (head.is_a? AbstractSectionModel) and (head.level < target.level)
           @context.pop
+          head = @context.head
         end
       elsif target = UnorderedListItemModel.from_line(line)
         # 列表
-        unless (head.is_a? UnorderedListWrapperModel) and (head.level == target.level) # 如果当前不在一个 无序列表 里
-          wrapper = UnorderedListWrapperModel.new target.level # 就整一个无序列表
-          loop do # 找到最近的 section 或 list
-            break if (head.is_a? AbstractSectionModel) or
-              ((head.is_a? AbstractListWrapperModel) and (head.level < wrapper.level))
+        # + 对上级 container 的操作
+        # ++ 没有 container -> new
+        # ++ 有，等级低 -> new
+        # ++ 有，等级高 -> pop 到同等级，如果没有同等级，则 new
+        # ++ 有，等级相等 -> 啥也不做
+        if !(head.is_a? UnorderedListWrapperModel) || head.level < target.level
+          @context.append UnorderedListWrapperModel.new target.level
+        elsif head.level > target.level
+          loop do
             @context.pop
             head = @context.head
+            break if head.level <= target.level # pop 到同等级
           end
-          @context.append wrapper # wrapper 入上下文栈
+          if head.level < target.level # 如果没有同等级，则 new
+            @context.append UnorderedListWrapperModel.new target.level
+          end
         end
       elsif target = CommentItemModel.from_line(line)
         # 注释
