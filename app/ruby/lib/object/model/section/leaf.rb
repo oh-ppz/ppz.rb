@@ -26,8 +26,6 @@ class LeafSectionModel < AbstractSectionModel
   end
 
   def to_html
-    %{<section id=#{@section_dom_id}><h#{@level}>#{@title}</h#{@level}>#{
-      super
-    }</section>}
+    "<section id=#{@section_dom_id}><h#{@level}>#{@title}</h#{@level}>#{super}</section>"
   end
 end
