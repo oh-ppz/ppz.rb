@@ -3,11 +3,16 @@
 require_relative '../lib/ppz'
 require_relative './common'
 require 'fileutils'
+require 'pathname'
 
-file_in, file_out = PPZMain::Util.get_file_in_and_out
+target_in, target_out = PPZMain::Util.get_in_and_out
 
-parser = PPZ::FileDocParser.new file_in
+target_out = Pathname target_out
+output_html_path = target_out + 'index.html'
+output_css_path = target_out + 'index.css'
+
+parser = PPZ::FileDocParser.new target_in
 model = parser.get_model
-
-PPZ::Func::write_to_file file_out, model.to_html
-FileUtils.cp PPZMain::CSS_FILE_PATH, (Pathname(File.dirname file_out) + 'ppz.css')
+output_html = '<link rel="stylesheet" href="./index.css"/>' + model.to_html 
+PPZ::Func::write_to_file output_html_path.to_s, output_html
+FileUtils.cp PPZMain::CSS_FILE_PATH, output_css_path
