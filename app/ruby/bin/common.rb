@@ -1,6 +1,9 @@
 require 'pathname'
 
 module PPZMain
+  CURRENT_PATH = File.dirname __FILE__
+  CSS_FILE_PATH = (Pathname CURRENT_PATH) + '../asset/style/ppz.css'
+
   class Util
     class << self
       def get_file_in_and_out

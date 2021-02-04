@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary     = '写作'
   s.authors     = ['wuse']
   s.email       = '372301467@qq.com'
-  s.files       = Dir['lib/**/*.rb'] + Dir['bin/**/*.rb']
+  s.files       = Dir['lib/**/*.rb'] + Dir['bin/**/*.rb'] + Dir['asset/**/*']
   s.homepage    = 'https://github.com/daGaiGuanYu/ppz'
   s.license     = 'MIT'
 end
