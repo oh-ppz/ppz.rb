@@ -1,6 +1,4 @@
-require_relative './abstract'
-
-class UnorderedListItemModel < AbstractListItemModel
+class PPZ::UnorderedListItemModel < PPZ::AbstractListItemModel
   REG_EXP = /^(\++) (.+)/
   def self.from_line line
     return nil unless REG_EXP.match(line)

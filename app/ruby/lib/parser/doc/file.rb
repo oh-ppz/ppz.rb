@@ -1,6 +1,4 @@
-require_relative './abstract'
-
-class FileDocParser < AbstractDocParser
+class PPZ::FileDocParser < PPZ::AbstractDocParser
   def initialize path
     super()
     unless File.exist? path

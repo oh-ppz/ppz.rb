@@ -1,6 +1,4 @@
-require_relative './model'
-
-class AbstractWrapperModel < AbstractModel
+class PPZ::AbstractWrapperModel < PPZ::AbstractModel
   def initialize
     @children = []
   end

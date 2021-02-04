@@ -1,4 +1,4 @@
-class Escape
+class PPZ::Escape
   PpzRule = [
     ['\\\\', '\\backslash', '\\'],
     ['\\*', '\\star;', '*'],

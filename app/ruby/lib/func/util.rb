@@ -1,4 +1,4 @@
-class Func
+class PPZ::Func
   class << self
     def write_to_file filepath, data
       if File.exist? filepath

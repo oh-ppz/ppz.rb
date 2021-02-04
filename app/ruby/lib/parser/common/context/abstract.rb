@@ -1,9 +1,7 @@
 # 当前行，所处的上下文
 # 比如 一级 section 下面的 ul 下的 第 n 个 ul
 
-require_relative '../../../func/util'
-
-class AbstractContext
+class PPZ::AbstractContext
   def initialize root
     @stack = [root]
   end

@@ -1,6 +1,4 @@
-require_relative '../../abstract/wrapper-model'
-
-class AbstractListItemModel < AbstractModel
+class PPZ::AbstractListItemModel < PPZ::AbstractModel
   attr_reader :level
   
   def initialize text, level

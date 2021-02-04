@@ -1,5 +1,3 @@
-require_relative './abstract'
-
-class UnorderedListWrapperModel < AbstractListWrapperModel
+class PPZ::UnorderedListWrapperModel < PPZ::AbstractListWrapperModel
   TAG_NAME = 'ul'
 end

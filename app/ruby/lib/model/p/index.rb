@@ -1,7 +1,5 @@
-require_relative '../abstract/model'
-
-class PModel < AbstractModel
-  UpperClass = AbstractSectionModel
+class PPZ::PModel < PPZ::AbstractModel
+  UpperClass = PPZ::AbstractSectionModel
 
   def initialize text
     # 转义行首的加号

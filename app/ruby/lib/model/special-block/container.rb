@@ -1,12 +1,10 @@
-require_relative '../abstract/wrapper-model'
-
-class SpecialContainerModel < AbstractWrapperModel
-  UpperClass = AbstractSectionModel
+class PPZ::SpecialContainerModel < PPZ::AbstractWrapperModel
+  UpperClass = PPZ::AbstractSectionModel
 
   REG_EXP = /^```( (.*))?/
   def self.from_line line
     return nil unless REG_EXP.match(line)
-    SpecialContainerModel.new $2
+    PPZ::SpecialContainerModel.new $2
   end
 
   def initialize name

@@ -1,6 +1,4 @@
-require_relative './abstract'
-
-class StringDocParser < AbstractDocParser
+class PPZ::StringDocParser < PPZ::AbstractDocParser
   def initialize str
     super()
     @lines = str.split /\n/

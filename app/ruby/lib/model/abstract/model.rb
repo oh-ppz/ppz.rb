@@ -1,6 +1,4 @@
-require_relative '../common/escape'
-
-class AbstractModel
+class PPZ::AbstractModel
   attr_accessor :left_model, :right_model, :index # 左右兄弟 model
   attr_accessor :father_model
 
@@ -13,7 +11,7 @@ class AbstractModel
   def transform_inline_element str
     str = str + ''
     # 因为加粗、斜体等，会生成 html 代码，为了不使“用户原本输入的 html”和“生成的 html”冲突，因此先把“用户输入的 html 转义
-    Escape.html_char! str
+    PPZ::Escape.html_char! str
     
     # 变粗等，使用特殊字符比如 *，来标识
     # 但这会使用户想输入 * 时，形成歧义
@@ -24,7 +22,7 @@ class AbstractModel
     # 再识别哪些变斜，哪些变粗
     # 再把用户原来想输入的 * 放到字符串里（某种形式 -> *)
 
-    Escape.ppz_char! str # 把用户输入的 \* 转义 => 剩下的 *** 就肯定是 斜体加粗 了
+    PPZ::Escape.ppz_char! str # 把用户输入的 \* 转义 => 剩下的 *** 就肯定是 斜体加粗 了
 
     # + 斜体和加粗
     str.gsub! /\*\*\*(.+)\*\*\*/, '<b><i>\1</i></b>'
@@ -39,6 +37,6 @@ class AbstractModel
     # + 链接 先图片后链接
     str.gsub! /\[([^\]]+)\]\(([^\)]+)\)/, '<a href="\2" title="\2">\1</a>'
     
-    Escape.transform_to_real! str
+    PPZ::Escape.transform_to_real! str
   end
 end

@@ -1,12 +1,11 @@
 #!/usr/bin/env ruby
 
-require_relative './ppz-util'
-require_relative '../lib/parser/doc/file'
-require_relative '../lib/func/util'
+require_relative '../lib/ppz'
+require_relative './common'
 
-file_in, file_out = UtilInMain.get_file_in_and_out
+file_in, file_out = PPZMain::Util.get_file_in_and_out
 
-parser = FileDocParser.new file_in
+parser = PPZ::FileDocParser.new file_in
 model = parser.get_model
 
-Func::write_to_file file_out, model.to_html
+PPZ::Func::write_to_file file_out, model.to_html

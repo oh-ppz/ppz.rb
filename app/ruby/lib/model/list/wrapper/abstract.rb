@@ -1,6 +1,4 @@
-require_relative '../../abstract/model.rb'
-
-class AbstractListWrapperModel < AbstractWrapperModel
+class PPZ::AbstractListWrapperModel < PPZ::AbstractWrapperModel
   attr_reader :level
   
   def initialize level

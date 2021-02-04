@@ -1,7 +1,5 @@
-require_relative '../abstract/model'
-
-class CommentItemModel < AbstractModel
-  ContainerClass = CommentContainerModel
+class PPZ::CommentItemModel < PPZ::AbstractModel
+  ContainerClass = PPZ::CommentContainerModel
   REG_EXP = /^\> (.+)/
 
   def initialize content

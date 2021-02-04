@@ -1,6 +1,4 @@
-require_relative './abstract'
-
-class LeafSectionModel < AbstractSectionModel
+class PPZ::LeafSectionModel < PPZ::AbstractSectionModel
   attr_accessor :title, :section_dom_id, :level
 
   def initialize title, level
@@ -18,7 +16,7 @@ class LeafSectionModel < AbstractSectionModel
       1 => 1, # 一个井号是 一级
       5 => 3 # 五个井号是 三级
     }[$1.size] || 2 # 其余都是 两级
-    LeafSectionModel.new $2, level
+    PPZ::LeafSectionModel.new $2, level
   end
   
   def get_nav_html

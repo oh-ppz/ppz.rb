@@ -1,6 +1,4 @@
-require_relative '../abstract/model'
-
-class SpecialItemModel < AbstractModel
+class PPZ::SpecialItemModel < PPZ::AbstractModel
   def initialize line
     @line = line
   end

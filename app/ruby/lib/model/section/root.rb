@@ -1,6 +1,4 @@
-require_relative './abstract'
-
-class RootSectionModel < AbstractSectionModel
+class PPZ::RootSectionModel < PPZ::AbstractSectionModel
   def level
     0
   end
