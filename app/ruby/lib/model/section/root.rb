@@ -11,6 +11,6 @@ class PPZ::RootSectionModel < PPZ::AbstractSectionModel
   end
 
   def to_html
-    get_nav_html + super
+    "#{get_nav_html}<article>#{super}</article>"
   end
 end
