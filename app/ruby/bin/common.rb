@@ -17,7 +17,7 @@ module PPZMain
           target_in += '.ppz'
           abort target_in[0..-5] + ' 不存在' unless File.exist? target_in # 还不存在的话，就说明是写错了
         end
-        abort '尚未支持编译文件夹' if File.directory? target_in
+        is_folder = File.directory? target_in
 
         # + 输出文件
         unless target_out
@@ -36,7 +36,7 @@ module PPZMain
           Dir.mkdir target_out
         end
         
-        [target_in, target_out]
+        [target_in, target_out, is_folder]
       end
     end
   end

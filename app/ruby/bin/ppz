@@ -5,14 +5,10 @@ require_relative './common'
 require 'fileutils'
 require 'pathname'
 
-target_in, target_out = PPZMain::Util.get_in_and_out
+TARGET_IN, TARGET_OUT, IS_FOLDER = PPZMain::Util.get_in_and_out
 
-target_out = Pathname target_out
-output_html_path = target_out + 'index.html'
-output_css_path = target_out + 'index.css'
-
-parser = PPZ::FileDocParser.new target_in
-model = parser.get_model
-output_html = '<link rel="stylesheet" href="./index.css"/>' + model.to_html 
-PPZ::Func::write_to_file output_html_path.to_s, output_html
-FileUtils.cp PPZMain::CSS_FILE_PATH, output_css_path
+if IS_FOLDER
+  require_relative './folder.rb'
+else
+  require_relative './doc.rb'
+end
