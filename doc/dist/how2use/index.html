@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="./index.css"/><aside><ul><li><a href="#section-1.1">安装</a><ul></ul></li><li><a href="#section-1.2">各元素介绍</a><ul><li><a href="#section-1.2-3.4">标题</a><ul></ul></li><li><a href="#section-1.2-3.5">列表</a><ul></ul></li><li><a href="#section-1.2-3.6">加粗、斜体</a><ul></ul></li><li><a href="#section-1.2-3.7">链接、图片</a><ul></ul></li><li><a href="#section-1.2-3.8">特殊块</a><ul></ul></li><li><a href="#section-1.2-3.9">转义</a><ul></ul></li></ul></li><li><a href="#section-1.3">开始编译！</a><ul></ul></li><li><a href="#section-1.4">深入使用</a><ul><li><a href="#section-1.4-3.1">变量</a><ul></ul></li><li><a href="#section-1.4-3.2">特殊块</a><ul></ul></li></ul></li></ul></aside><article><section id=section-1.1><h1>安装</h1><ul><li>首先需要&nbsp;ruby&nbsp;环境（<a href="https://rubyinstaller.cn/downloads/" title="https://rubyinstaller.cn/downloads/">windows&nbsp;安装包下载</a>）</li><li>其次，安装&nbsp;ppz，在命令行：<span class="special-txt">gem&nbsp;install&nbsp;ppz</span>（有些系统需要&nbsp;sudo）</li></ul><p>
+<link rel="stylesheet" href="./index.css"/><aside><ul><li><a href="#section-1.1">安装</a><ul></ul></li><li><a href="#section-1.2">各元素介绍</a><ul><li><a href="#section-1.2-3.4">标题</a><ul></ul></li><li><a href="#section-1.2-3.5">列表</a><ul></ul></li><li><a href="#section-1.2-3.6">加粗、斜体</a><ul></ul></li><li><a href="#section-1.2-3.7">链接、图片</a><ul></ul></li><li><a href="#section-1.2-3.8">注释</a><ul></ul></li><li><a href="#section-1.2-3.9">特殊块</a><ul></ul></li><li><a href="#section-1.2-3.10">转义</a><ul></ul></li></ul></li><li><a href="#section-1.3">开始编译！</a><ul></ul></li><li><a href="#section-1.4">深入使用</a><ul><li><a href="#section-1.4-3.1">变量</a><ul></ul></li><li><a href="#section-1.4-3.2">特殊块</a><ul></ul></li></ul></li></ul></aside><article><section id=section-1.1><h1>安装</h1><ul><li>首先需要&nbsp;ruby&nbsp;环境（<a href="https://rubyinstaller.cn/downloads/" title="https://rubyinstaller.cn/downloads/">windows&nbsp;安装包下载</a>）</li><li>其次，安装&nbsp;ppz，在命令行：<span class="special-txt">gem&nbsp;install&nbsp;ppz</span>（有些系统需要&nbsp;sudo）</li></ul><p>
 </p></section><section id=section-1.2><h1>各元素介绍</h1><p>语法跟&nbsp;markdown&nbsp;等规范类似
-</p><div class="comment"><div>如果你对&nbsp;markdown&nbsp;语法比较熟悉，可以先跳过这一步</div><div>尽管跟&nbsp;markdown&nbsp;语法类似，但还是有些许不同</div></div><p>
+</p><div class="comment-container"><div class="comment-item">如果你对&nbsp;markdown&nbsp;语法比较熟悉，可以先跳过这一步</div><div class="comment-item">尽管跟&nbsp;markdown&nbsp;语法类似，但还是有些许不同</div></div><p>
 </p><section id=section-1.2-3.4><h3>标题</h3><p>井号、后面一个空格、再加上文字，就构成了标题：
 </p><div class="special-block "><div># 这是一个标题
 </div><div>## 这是二级标题
@@ -36,14 +36,17 @@
 </p><p><a href="https://github.com/daGaiGuanYu/ppz" title="https://github.com/daGaiGuanYu/ppz">这是一个链接</a>
 </p><p>这是一个图片：<img title="这是一个图片" src="https://l.ruby-china.com/user/avatar/34744/d37eb3.jpg!lg" />
 </p><p>
-</p></section><section id=section-1.2-3.8><h3>特殊块</h3><p>有些文字需要特殊的格式，比如程序的源代码
+</p></section><section id=section-1.2-3.8><h3>注释</h3><div class="special-block "><div>> 文字前加一个“大于号”、一个“空格”，就成了备注，支持多行
+</div><div>> 这是另一行
+</div></div><div class="comment-container"><div class="comment-item">文字前加一个“大于号”、一个“空格”，就成了备注，支持多行</div><div class="comment-item">这是另一行</div></div><p>
+</p></section><section id=section-1.2-3.9><h3>特殊块</h3><p>有些文字需要特殊的格式，比如程序的源代码
 </p><p>这是&nbsp;ppz&nbsp;标准之外，供扩展的部分
 </p><div class="special-block "><div>``` 这里写特殊块的名字
 </div><div>这里写一些代码什么的
 </div><div>当然可以写很多行
 </div><div>```
 </div></div><p>
-</p></section><section id=section-1.2-3.9><h3>转义</h3><p>上面很多地方借用了一些符号，来表达“某种格式”
+</p></section><section id=section-1.2-3.10><h3>转义</h3><p>上面很多地方借用了一些符号，来表达“某种格式”
 </p><p>这样，当想写这个符号时，就会被误以为“要添加某种格式”
 </p><p>比如：<span class="special-txt">**你好**</span>&nbsp;当写下这些时
 </p><p>到底是想把这两个字加粗

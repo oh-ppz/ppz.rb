@@ -7,6 +7,6 @@ class PPZ::CommentItemModel < PPZ::AbstractModel
   end
   
   def to_html
-    "<div>#{@content}</div>"
+    "<div class=\"comment-item\">#{@content}</div>"
   end
 end
