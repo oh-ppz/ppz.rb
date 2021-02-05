@@ -51,14 +51,36 @@ h2::before,
 h3::before {
   content: '# ';
   opacity: 0.3;
+  font-size: 1rem;
 }
-.special-block {
-  white-space: pre;
+.comment-container {
+  margin: 1rem 0;
+  padding: 1rem 1.6rem;
+  background: rgba(0,0,0,0.2);
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+.comment-item {
+  opacity: 0.8;
+}
+.special-block-container {
   background: #141c22;
   overflow: auto;
   border-radius: 4px;
   color: #eee;
+  font-family: monospace;
+  white-space: pre;
+  margin: 1rem 0;
   padding: 1rem;
+  counter-reset: line-index;
+}
+.special-block-item::before {
+  counter-increment: line-index;
+  content: counter(line-index) " |  ";
+  opacity: 0.3;
+}
+.special-block-item:hover::before {
+  opacity: 0.8;
 }
 .special-txt {
   background: rgba(27,31,35,0.05);

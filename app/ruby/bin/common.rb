@@ -22,7 +22,7 @@ module PPZMain
         # + 输出文件
         unless target_out
           # 从输入文件获取文件名
-          target_out = (/(.*).ppz$/.match target_in)?$1:target_in
+          target_out = ((/(.*).ppz$/.match target_in)?$1:target_in) + '.pp'
         end
         target_out = WORK_DIRECTORY + target_out
         # ++ 检查上级文件夹是否存在
