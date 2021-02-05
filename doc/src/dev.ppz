@@ -6,6 +6,7 @@
 
 # 已知 bug
 + 某路径结尾有斜线时
++ 文件重名
 
 # 临时内容
 +  [id索引](https://stackoverflow.com/questions/12868830/get-css-id-from-url)
