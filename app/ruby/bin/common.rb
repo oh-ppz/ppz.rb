@@ -35,6 +35,10 @@ module PPZMain
         else
           Dir.mkdir target_out
         end
+        # ++ 去除文件夹路径最后的斜线
+        if ['/', '\\'].include? target_out[-1]
+          target_out = target_out[0...-1]
+        end
         
         [target_in, target_out, is_folder]
       end
