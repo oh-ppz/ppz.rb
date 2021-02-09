@@ -3,8 +3,8 @@
 
 [项目传送门](https://github.com/daGaiGuanYu/ppz)
 
-+ [简介](https://dagaiguanyu.github.io/ppz/doc/dist/index/index.html)
-+ [使用](https://dagaiguanyu.github.io/ppz/doc/dist/how2use/)
++ [理念](https://dagaiguanyu.github.io/ppz/doc.pp/doc/%E7%90%86%E5%BF%B5.html)
++ [使用](https://dagaiguanyu.github.io/ppz/doc.pp/doc/%E4%BD%BF%E7%94%A8.html)
 
 # 为什么需要新的？
 一直以来，码者都在用 markdown 写东西，但是 markdown 有一些缺点：
@@ -13,7 +13,8 @@
 + 如果写好几篇文章，，，就没有一个流畅的方式，把这些文章联系在一起（要手动维护链接）
 
 # 现在
-现阶段基本实现了 ppz 语法（类似 markdown 语法）到 html 的转化
++ 基本实现了 ppz 语法（类似 markdown 语法）到 html 的转化
++ 编译一个文件夹里的所有 ppz 文件，并生成目录
 
 未实现的 markdown 语法：
 + table
