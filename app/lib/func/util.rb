@@ -4,7 +4,7 @@ class PPZ::Func
       if File.exist? filepath
         throw '文件已存在'
       end
-      file = File.new filepath, 'w'
+      file = File.new filepath, mode: 'w:UTF-8'
       file.print data
       file.close
     end
