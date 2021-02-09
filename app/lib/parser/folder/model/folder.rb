@@ -20,7 +20,11 @@ module PPZ::Folder
         "<link rel=\"stylesheet\" href=\"#{get_css_path}\"/><ul>#{
           @children
           .map do |child|
-            "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
+            if child.file_ext == '.ppz'
+              "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
+            else
+              ''
+            end
           end
           .join
         }</ul>"

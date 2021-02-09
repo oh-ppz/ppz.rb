@@ -8,14 +8,16 @@ class AbstractFileModel < AbstractModel
     end
   end
 
+  attr_reader :file_ext
+
   def initialize path, level
     super
-    unless /^((\d+)_)?([^\.]+)(\.([^\.]+))?$/.match @basename
+    unless /^((\d+)_)?([^\.]+)(\.[^\.]+)?$/.match @basename
       throw '文件的命名方式不太理解哦:' + path
     end
     @index = $2?($2.to_i):(Float::INFINITY)
     @name = $3
-    @suffix = $5 || ''
+    @file_ext = $4 || ''
   end
 end
 end
