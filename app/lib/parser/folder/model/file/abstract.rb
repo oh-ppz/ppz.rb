@@ -1,14 +1,14 @@
 module PPZ::Folder
 class AbstractFileModel < AbstractModel
-  def self.from_path path
+  def self.from_path path, level
     if (File.extname path) == '.ppz'
-      PPZFileModel.new path
+      PPZFileModel.new path, level
     else
-      OtherFileModel.new path
+      OtherFileModel.new path, level
     end
   end
 
-  def initialize path
+  def initialize path, level
     super
     unless /^((\d+)_)?([^\.]+)(\.([^\.]+))?$/.match @basename
       throw '文件的命名方式不太理解哦:' + path

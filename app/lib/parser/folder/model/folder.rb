@@ -1,6 +1,6 @@
 module PPZ::Folder
   class FolderModel < AbstractModel
-    def initialize path
+    def initialize path, level
       super
       /^((\d+)_)?(.+)/.match @basename
       @index = $2?($2.to_i):(Float::INFINITY)
@@ -8,7 +8,7 @@ module PPZ::Folder
 
       @children = []
       (Dir.children path).each do |child_name|
-        @children.push AbstractModel.from_path (path + '/' + child_name)
+        @children.push AbstractModel.from_path (path + '/' + child_name), level
       end
       @children.sort! do |a, b|
         a.index <=> b.index
@@ -16,13 +16,14 @@ module PPZ::Folder
     end
 
     def _compile out_dir # compile 是 _compile 的安全版本
-      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), "<ul>#{
-        @children
-        .map do |child|
-          "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
-        end
-        .join
-      }</ul>"
+      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'),
+        "<link rel=\"stylesheet\" href=\"#{get_css_path}\"/><ul>#{
+          @children
+          .map do |child|
+            "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
+          end
+          .join
+        }</ul>"
 
       children_dir = out_dir + '/' + @name
       Dir.mkdir children_dir

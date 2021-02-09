@@ -17,5 +17,13 @@ class PPZ::Func
     def class_has_const? instance, const_name
       has_const? instance.class, const_name
     end
+
+    def format_path path
+      if ['/', '\\'].include? path[-1]
+        path[0...-1]
+      else
+        path
+      end
+    end
   end
 end
