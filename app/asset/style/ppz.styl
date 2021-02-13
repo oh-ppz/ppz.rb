@@ -1,3 +1,5 @@
+nav-width = 188px
+
 html
   line-height 1.5
 body, div, p, aside
@@ -15,7 +17,7 @@ aside
   position fixed
   top 0
   left 0
-  width 188px
+  width nav-width
   height 100vh
 
   ul
@@ -29,7 +31,7 @@ aside
     white-space nowrap
 
 article
-  margin-left: 188px
+  margin-left: nav-width
   padding: 1px 1rem
 h1
   font-size 2rem
@@ -80,3 +82,25 @@ h1, h2, h3
   border-radius 4px
   font-size 0.9em
   padding 2px 4px
+
+.interpage-nav
+  margin-left nav-width
+  list-style none
+  padding 0 1rem
+  .prev
+    float left
+    &::before
+      content '上一篇：'
+      opacity 0.6
+  .next
+    float right
+    &::before
+      content '下一篇：'
+      opacity 0.6
+  &::after
+    content ''
+    display block
+    clear both
+
+.folder-nav
+  margin 2rem 3rem

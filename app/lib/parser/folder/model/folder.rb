@@ -25,19 +25,21 @@ module PPZ::Folder
       end
     end
 
+    def title
+      @name
+    end
+
     def _compile out_dir # compile 是 _compile 的安全版本
-      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'),
-        "<link rel=\"stylesheet\" href=\"#{get_css_path}\"/><ul>#{
-          @children
-          .map do |child|
-            if child.file_ext == '.ppz'
-              "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
-            else
-              ''
-            end
-          end
-          .join
-        }</ul>"
+      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), %!<title>#{title}</title>
+<link rel="stylesheet" href="#{get_css_path}"/><div class="folder-nav"><ul>#{
+@children
+  .map do |child|
+    child.file_ext == '.ppz' ?
+      "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
+      : ''
+  end
+  .join
+}</ul></div>!
 
       children_dir = out_dir + '/' + @name
       Dir.mkdir children_dir
