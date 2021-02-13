@@ -1,5 +1,6 @@
 module PPZ::Folder
 class AbstractFileModel < AbstractModel
+  attr_reader :name
   def self.from_path path, level
     if (File.extname path) == '.ppz'
       PPZFileModel.new path, level

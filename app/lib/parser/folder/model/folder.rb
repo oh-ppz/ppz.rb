@@ -7,11 +7,21 @@ module PPZ::Folder
       @name = $3
 
       @children = []
-      (Dir.children path).each do |child_name|
+      (Dir.children path, encoding: 'utf-8').each do |child_name|
         @children.push AbstractModel.from_path (path + '/' + child_name), level
       end
       @children.sort! do |a, b|
         a.index <=> b.index
+      end
+
+      left = right = nil
+      @children.each do |child|
+        next unless child.is_a? PPZFileModel
+        if left
+          left.right = child
+          child.left = left
+        end
+        left = child
       end
     end
 
