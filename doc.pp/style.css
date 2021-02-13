@@ -88,3 +88,30 @@ h3::before {
   font-size: 0.9em;
   padding: 2px 4px;
 }
+.interpage-nav {
+  margin-left: 188px;
+  list-style: none;
+  padding: 0 1rem;
+}
+.interpage-nav .prev {
+  float: left;
+}
+.interpage-nav .prev::before {
+  content: '上一篇：';
+  opacity: 0.6;
+}
+.interpage-nav .next {
+  float: right;
+}
+.interpage-nav .next::before {
+  content: '下一篇：';
+  opacity: 0.6;
+}
+.interpage-nav::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.folder-nav {
+  margin: 2rem 3rem;
+}
