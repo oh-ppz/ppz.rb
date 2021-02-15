@@ -33,10 +33,11 @@ module PPZ::Folder
       PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), %!<title>#{title}</title>
 <link rel="stylesheet" href="#{get_css_path}"/><div class="folder-nav"><ul>#{
 @children
+  .select do |child|
+    (child.class == FolderModel) || (child.file_ext == '.ppz')
+  end
   .map do |child|
-    child.file_ext == '.ppz' ?
-      "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
-      : ''
+    "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
   end
   .join
 }</ul></div>!

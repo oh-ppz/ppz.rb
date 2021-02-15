@@ -10,7 +10,6 @@ class AbstractFileModel < AbstractModel
   end
 
   attr_reader :file_ext
-
   def initialize path, level
     super
     unless /^((\d+)_)?([^\.]+)(\.[^\.]+)?$/.match @basename
