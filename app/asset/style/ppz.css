@@ -28,13 +28,14 @@ aside ul {
 }
 aside a {
   width: 100%;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 article {
   margin-left: 188px;
-  padding: 1px 1rem;
+  padding: 1px 2rem 1rem 1rem;
 }
 h1 {
   font-size: 2rem;
@@ -89,9 +90,9 @@ h3::before {
   padding: 2px 4px;
 }
 .interpage-nav {
-  margin-left: 188px;
+  margin: 1rem 2rem 2rem 188px;
+  padding: 0 2rem;
   list-style: none;
-  padding: 0 1rem;
 }
 .interpage-nav .prev {
   float: left;
