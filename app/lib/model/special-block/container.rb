@@ -1,10 +1,17 @@
 class PPZ::SpecialContainerModel < PPZ::AbstractWrapperModel
   UpperClass = PPZ::AbstractSectionModel
 
-  REG_EXP = /^```( (.*))?/
+  REG_EXP = /^```( (.*))?$/
   def self.from_line line
-    return nil unless REG_EXP.match(line)
-    PPZ::SpecialContainerModel.new $2
+    if REG_EXP.match line
+      if $2 && ($2.include? '```')
+        nil
+      else
+        PPZ::SpecialContainerModel.new $2
+      end
+    else
+      nil
+    end
   end
 
   def initialize name
