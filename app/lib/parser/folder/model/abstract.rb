@@ -25,8 +25,9 @@ module PPZ::Folder
       ('../' * @level) + 'style.css'
     end
 
-    def relative_link relative_level
-      # relative_level 是“当前 model 比目标 level 高几级”
+    def relative_link target
+      relative_level = target.level - @level # relative_level 是“当前 model 比目标 level 高几级”
+
       (if relative_level > 0
         '../' * relative_level
       elsif relative_level < 0
@@ -43,16 +44,32 @@ module PPZ::Folder
     end
 
     private
+      def get_ancestor_html
+        list = []
+        father = self
+        loop do
+          break unless father.father_model
+          father = father.father_model
+          list.unshift father
+        end
+        %~<div class="ancestor-nav"><ul>#{
+          (list.collect do |node|
+            %`<li><a href="#{node.relative_link self}">#{node.name}</a></li>`
+          end
+          .join) + %`<li class="self">#{self.name}</li>`
+        }</ul></div>~
+      end
+
       def get_nav_html
         # prev_model nav_html
         prev_model_html = ''
         if @prev_model
-          prev_link = @prev_model.relative_link @level - @prev_model.level
+          prev_link = @prev_model.relative_link self
           prev_model_html = "<li class=\"prev\"><a href=\"#{prev_link}\">#{@prev_model.name}</a></li>"
         end
         next_model_html = ''
         if @next_model
-          next_link = @next_model.relative_link @level - @next_model.level
+          next_link = @next_model.relative_link self
           next_model_html = "<li class=\"next\"><a href=\"#{next_link}\">#{@next_model.name}</a></li>"
         end
 

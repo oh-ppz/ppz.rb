@@ -6,7 +6,7 @@ module PPZ::Folder
       parser = PPZ::FileDocParser.new @path
       html_str = %!<link rel="stylesheet" href="#{get_css_path}"/><title>#{
         @name
-      }</title>#{parser.get_model.to_html}#{get_nav_html}!
+      }</title>#{get_ancestor_html}#{parser.get_model.to_html}#{get_nav_html}!
       PPZ::Func::write_to_file (dir_out + '/' + @name + '.html'), html_str
     end
   end
