@@ -1,5 +1,7 @@
 module PPZ::Folder
   class FolderModel < AbstractModel
+    attr_reader :children
+
     def initialize path, level
       super
       /^((\d+)_)?(.+)/.match @basename
@@ -14,8 +16,11 @@ module PPZ::Folder
         a.index <=> b.index
       end
 
+      # 设置上级 和 左右
       left = right = nil
       @children.each do |child|
+        child.father_model = self # 上级
+
         next unless child.is_a? PPZFileModel
         if left
           left.right = child
@@ -40,7 +45,7 @@ module PPZ::Folder
     "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
   end
   .join
-}</ul></div>!
+}</ul></div>#{get_nav_html}!
 
       children_dir = out_dir + '/' + @name
       Dir.mkdir children_dir
@@ -48,6 +53,8 @@ module PPZ::Folder
     end
 
     def compile out_dir
+      set_prev_and_next_page
+
       unless out_dir.is_a? String
         throw 'out_dir 只能是字符串'
       end
@@ -60,5 +67,28 @@ module PPZ::Folder
         _compile out_dir
       end
     end
+    
+    # 设置页面的“上一篇、下一篇”
+    private
+      def set_prev_and_next_page
+        list = []
+        linearize_children self, list
+        list.inject do |pre, nex|
+          pre.next_model = nex
+          nex.prev_model = pre
+          nex
+        end
+      end
+      
+      def linearize_children child, list
+        if child.is_a? PPZFileModel
+          list.push child
+        elsif child.is_a? FolderModel
+          list.push child
+          child.children.each do |cc|
+            linearize_children cc, list
+          end
+        end
+      end
   end
 end
