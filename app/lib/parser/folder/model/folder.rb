@@ -30,23 +30,8 @@ module PPZ::Folder
       end
     end
 
-    def title
-      @name
-    end
-
     def _compile out_dir # compile 是 _compile 的安全版本
-      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), %!<title>#{title
-      }</title><link rel="stylesheet" href="#{get_css_path}"/>#{get_ancestor_html
-      }<div class="folder-nav"><ul>#{
-      @children
-        .select do |child|
-          (child.class == FolderModel) || (child.file_ext == '.ppz')
-        end
-        .map do |child|
-          "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
-        end
-        .join
-      }</ul></div>#{get_nav_html}!
+      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), to_html
 
       children_dir = out_dir + '/' + @name
       Dir.mkdir children_dir
@@ -90,6 +75,19 @@ module PPZ::Folder
             linearize_children cc, list
           end
         end
+      end
+
+      def get_content_html
+        %!<div class="folder-nav"><ul>#{
+          @children
+          .select do |child|
+            (child.class == FolderModel) || (child.file_ext == '.ppz')
+          end
+          .map do |child|
+            "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
+          end
+          .join
+        }</ul></div>!
       end
   end
 end

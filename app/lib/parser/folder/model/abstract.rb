@@ -44,6 +44,17 @@ module PPZ::Folder
     end
 
     private
+      def to_html
+        get_head_html +
+        get_ancestor_html +
+        get_content_html +
+        get_nav_html
+      end
+
+      def get_head_html
+        %~<title>#{@name}}</title><link rel="stylesheet" href="#{get_css_path}"/>~
+      end
+      
       def get_ancestor_html
         list = []
         father = self
