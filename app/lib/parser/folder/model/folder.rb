@@ -78,7 +78,7 @@ module PPZ::Folder
       end
 
       def get_content_html
-        %!<div class="folder-nav"><ul>#{
+        %!<article><ul>#{
           @children
           .select do |child|
             (child.class == FolderModel) || (child.file_ext == '.ppz')
@@ -87,7 +87,7 @@ module PPZ::Folder
             "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
           end
           .join
-        }</ul></div>!
+        }</ul></article>!
       end
   end
 end

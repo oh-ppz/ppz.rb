@@ -52,7 +52,7 @@ module PPZ::Folder
       end
 
       def get_head_html
-        %~<title>#{@name}}</title><link rel="stylesheet" href="#{get_css_path}"/>~
+        %~<title>#{@name}</title><link rel="stylesheet" href="#{get_css_path}"/>~
       end
       
       def get_ancestor_html

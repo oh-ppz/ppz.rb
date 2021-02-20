@@ -33,6 +33,32 @@ aside a {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.ancestor-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  margin: 1rem 2rem 0 0;
+  text-align: right;
+}
+.ancestor-nav li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.ancestor-nav li a {
+  display: inline-block;
+  opacity: 0.66;
+  transition: all 0.3s;
+}
+.ancestor-nav li a:hover {
+  opacity: 1;
+  transform: scale(1.1, 1.1);
+}
+.ancestor-nav li:not(.self)::after {
+  content: '/';
+  margin: 0 0.36rem;
+}
 article {
   margin-left: 188px;
   padding: 1px 2rem 1rem 1rem;
@@ -112,7 +138,4 @@ h3::before {
   content: '';
   display: block;
   clear: both;
-}
-.folder-nav {
-  margin: 2rem 3rem;
 }
