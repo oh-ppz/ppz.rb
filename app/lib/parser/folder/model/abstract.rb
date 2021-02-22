@@ -26,13 +26,13 @@ module PPZ::Folder
     end
 
     def relative_link target
-      relative_level = target.level - @level # relative_level 是“当前 model 比目标 level 高几级”
+      relative_level = @level - target.level # relative_level 是“目标 model 比当前 level 高几级”
 
       (if relative_level > 0
         '../' * relative_level
       elsif relative_level < 0
         result = ''
-        father = @father_model
+        father = target.father_model
         (- relative_level).times do
           result = father.name + '/' + result
           father = father.father_model
@@ -40,7 +40,7 @@ module PPZ::Folder
         result
       else
         ''
-      end) + @name + '.html'
+      end) + target.name + '.html'
     end
 
     private
@@ -65,7 +65,7 @@ module PPZ::Folder
         end
         %~<div class="ancestor-nav"><ul>#{
           (list.collect do |node|
-            %`<li><a href="#{node.relative_link self}">#{node.name}</a></li>`
+            %`<li><a href="#{relative_link node}">#{node.name}</a></li>`
           end
           .join) + %`<li class="self">#{self.name}</li>`
         }</ul></div>~
@@ -75,12 +75,12 @@ module PPZ::Folder
         # prev_model nav_html
         prev_model_html = ''
         if @prev_model
-          prev_link = @prev_model.relative_link self
+          prev_link = relative_link @prev_model
           prev_model_html = "<li class=\"prev\"><a href=\"#{prev_link}\">#{@prev_model.name}</a></li>"
         end
         next_model_html = ''
         if @next_model
-          next_link = @next_model.relative_link self
+          next_link = relative_link @next_model
           next_model_html = "<li class=\"next\"><a href=\"#{next_link}\">#{@next_model.name}</a></li>"
         end
 

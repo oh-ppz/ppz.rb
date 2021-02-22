@@ -54,6 +54,23 @@ module PPZ::Folder
       end
     end
     
+    def get_content_table_html root
+      %~<ul>#{
+        @children
+        .select do |child|
+          (child.class == FolderModel) || (child.file_ext == '.ppz')
+        end
+        .map do |child|
+          result = "<li><a href=\"./#{root.relative_link child}\">#{child.name}</a></li>"
+          if child.is_a? FolderModel
+            result += child.get_content_table_html root
+          end
+          result
+        end
+        .join
+      }</ul>~
+    end
+
     # 设置页面的“上一篇、下一篇”
     private
       def set_prev_and_next_page
@@ -78,16 +95,7 @@ module PPZ::Folder
       end
 
       def get_content_html
-        %!<article><ul>#{
-          @children
-          .select do |child|
-            (child.class == FolderModel) || (child.file_ext == '.ppz')
-          end
-          .map do |child|
-            "<li><a href=\"./#{@name}/#{child.name}.html\">#{child.name}</a></li>"
-          end
-          .join
-        }</ul></article>!
+        "<article>#{get_content_table_html self}</article>"
       end
   end
 end
