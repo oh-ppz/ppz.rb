@@ -2,7 +2,7 @@
 
 class PPZ::AbstractDocParser
   def initialize
-    @context = PPZ::DocContext.new PPZ::RootSectionModel.new
+    @context = PPZ::ParserContext.new PPZ::RootSectionModel.new
   end
 
   def get_model
