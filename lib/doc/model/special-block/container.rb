@@ -20,6 +20,6 @@ class PPZ::SpecialContainerModel < PPZ::AbstractWrapperModel
   end
   
   def to_html
-    "<div class=\"special-block-container #{@name}\">#{super}</div>"
+    "<ol class=\"special-block-container #{@name}\">#{super}</ol>"
   end
 end

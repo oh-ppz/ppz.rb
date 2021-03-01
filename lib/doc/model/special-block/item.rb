@@ -3,6 +3,6 @@ class PPZ::SpecialItemModel < PPZ::AbstractModel
     @line = line
   end
   def to_html
-    "<div class=\"item\">#{@line}</div>"
+    "<li>#{@line}</li>"
   end
 end
