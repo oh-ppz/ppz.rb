@@ -21,10 +21,6 @@ module PPZ::Folder
       end
     end
 
-    def get_css_path
-      ('../' * @level) + 'style.css'
-    end
-
     def relative_link target
       relative_level = @level - target.level # relative_level 是“目标 model 比当前 level 高几级”
 
@@ -48,11 +44,13 @@ module PPZ::Folder
         get_head_html +
         get_ancestor_html +
         get_content_html +
-        get_nav_html
+        get_nav_html +
+        get_js_html
       end
 
       def get_head_html
-        %~<title>#{@name}</title><link rel="stylesheet" href="#{get_css_path}"/>~
+        css_path = ('../' * @level) + 'style.css'
+        %~<title>#{@name}</title><link rel="stylesheet" href="#{css_path}">~
       end
       
       def get_ancestor_html
@@ -85,6 +83,11 @@ module PPZ::Folder
         end
 
         %~<ul class="interpage-nav">#{prev_model_html}#{next_model_html}</ul>~
+      end
+
+      def get_js_html
+        js_path = ('../' * @level) + 'index.js'
+        %~<script type="module" src="#{js_path}"></script>~
       end
   end
 end
