@@ -1,12 +1,18 @@
+require 'pathname'
+
 module PPZ::Folder
   class AbstractModel
     attr_reader :index, :name, :level
     attr_accessor :prev_model, :next_model, :father_model
 
     def initialize path, level
-      throw '文件（夹）的名字得是字符串啊' unless path.is_a? String
+      if path.is_a? String
+        path = Pathname path
+      elsif !(path.is_a? Pathname)
+        throw '文件夹的名字必须是 String 或 Pathname'
+      end
       @path = path
-      @basename = File.basename path
+      @basename = path.basename.to_s
       @level = level
     end
 
@@ -49,7 +55,7 @@ module PPZ::Folder
       end
 
       def get_head_html
-        css_path = ('../' * @level) + 'style.css'
+        css_path = ('../' * @level) + '.ppz/asset/style/index.css'
         %~<title>#{@name}</title><link rel="stylesheet" href="#{css_path}">~
       end
       
@@ -86,7 +92,7 @@ module PPZ::Folder
       end
 
       def get_js_html
-        js_path = ('../' * @level) + 'index.js'
+        js_path = ('../' * @level) + '.ppz/asset/js/index.js'
         %~<script type="module" src="#{js_path}"></script>~
       end
   end

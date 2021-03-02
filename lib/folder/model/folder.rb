@@ -1,3 +1,5 @@
+require 'pathname'
+
 module PPZ::Folder
   class FolderModel < AbstractModel
     attr_reader :children
@@ -9,8 +11,8 @@ module PPZ::Folder
       @name = $3
 
       @children = []
-      (Dir.children path, encoding: 'utf-8').each do |child_name|
-        @children.push AbstractModel.from_path (path + '/' + child_name), level
+      (Dir.children @path, encoding: 'utf-8').each do |child_name|
+        @children.push AbstractModel.from_path (@path + child_name), level
       end
       @children.sort! do |a, b|
         a.index <=> b.index
@@ -31,27 +33,28 @@ module PPZ::Folder
     end
 
     def _compile out_dir # compile 是 _compile 的安全版本
-      PPZ::Func.write_to_file (out_dir + '/' + @name + '.html'), to_html
+      out_file_pathname = out_dir + (@name + '.html')
+      PPZ::Func.write_to_file out_file_pathname, to_html
 
-      children_dir = out_dir + '/' + @name
+      children_dir = out_dir + @name
       Dir.mkdir children_dir
       @children.each { |child| child._compile children_dir }
     end
 
     def compile out_dir
+      if out_dir.is_a? String
+        out_dir = Pathname out_dir
+      elsif !(out_dir.is_a? Pathname)
+        throw '输出文件夹的名字必须是 String 或 Pathname'
+      end
+
       set_prev_and_next_page
 
-      unless out_dir.is_a? String
-        throw 'out_dir 只能是字符串'
-      end
       unless Dir.exist? out_dir
         throw "out_dir #{out_dir} 不存在"
       end
-      if ['/', '\\'].include? out_dir[-1]
-        _compile out_dir[0...-1]
-      else
-        _compile out_dir
-      end
+      
+      _compile out_dir
     end
     
     def get_content_table_html root

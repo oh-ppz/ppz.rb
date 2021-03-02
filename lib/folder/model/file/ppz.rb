@@ -3,7 +3,7 @@ module PPZ::Folder
     attr_accessor :left, :right
 
     def _compile dir_out
-      PPZ::Func::write_to_file (dir_out + '/' + @name + '.html'), to_html
+      PPZ::Func::write_to_file (dir_out + (@name + '.html')), to_html
     end
 
     private
