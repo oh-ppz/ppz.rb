@@ -1,6 +1,5 @@
 module PPZ::Folder
 class AbstractFileModel < AbstractModel
-  attr_reader :name
   def self.from_path path, level
     if (File.extname path) == '.ppz'
       PPZFileModel.new path, level
@@ -12,12 +11,17 @@ class AbstractFileModel < AbstractModel
   attr_reader :file_ext
   def initialize path, level
     super
-    unless /^((\d+)_)?([^\.]+)(\.[^\.]+)?$/.match @basename
-      throw '文件的命名方式不太理解哦:' + path
+    temp_bn = @basename
+    if /^(\d+)_/.match temp_bn
+      @index = $1.to_i
+      temp_bn = temp_bn[($1.size + 1)..-1]
+    else
+      @index = Float::INFINITY
     end
-    @index = $2?($2.to_i):(Float::INFINITY)
-    @name = $3
-    @file_ext = $4 || ''
+
+    /(.*)(\.[^\.]+)$/.match temp_bn
+    @name = $1 || temp_bn
+    @file_ext = $2 || ''
   end
 end
 end
